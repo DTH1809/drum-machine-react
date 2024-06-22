@@ -50,7 +50,7 @@ function App() {
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [handleKeyPress]);
+  },);
 
   
     const handleVolumeChange = (event) => {
