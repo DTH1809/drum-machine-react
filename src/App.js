@@ -31,6 +31,14 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
+
   const handleKeyPress = (event) => {
       console.log(event)
       const audio = document.getElementById(event.key.toUpperCase());
@@ -45,13 +53,7 @@ function App() {
       }
     }
 
-  useEffect(() => {
-      document.addEventListener('keydown', handleKeyPress);
-      return () => {
-        document.removeEventListener('keydown', handleKeyPress);
-      };
-    }, []);
-
+  
     const handleVolumeChange = (event) => {
       setVolume(event.target.value);
     };
