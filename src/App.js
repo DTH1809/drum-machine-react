@@ -31,6 +31,20 @@ function App() {
     }
   }
 
+  const handleKeyPress = (event) => {
+    console.log(event)
+    const audio = document.getElementById(event.key.toUpperCase());
+    if (audio) {
+      if (!audio.paused) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+      audio.volume = volume;
+      audio.play().catch(error => console.log('Audio play error:', error));
+      document.getElementById("display").innerText = keyToIdMap[event.key.toUpperCase()]
+    }
+  }
+
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPress);
     return () => {
@@ -38,27 +52,10 @@ function App() {
     };
   }, [handleKeyPress]);
 
-
-  const handleKeyPress = (event) => {
-      console.log(event)
-      const audio = document.getElementById(event.key.toUpperCase());
-      if (audio) {
-        if (!audio.paused) {
-          audio.pause();
-          audio.currentTime = 0;
-        }
-        audio.volume = volume;
-        audio.play().catch(error => console.log('Audio play error:', error));
-        document.getElementById("display").innerText = keyToIdMap[event.key.toUpperCase()]
-      }
-    }
-
   
     const handleVolumeChange = (event) => {
       setVolume(event.target.value);
     };
-
-  
 
   return (
     <div className="App">
